@@ -1,4 +1,4 @@
-amd-config-builder
+amd-config-builder [![Travis CI Status](https://secure.travis-ci.org/herby/amd-config-builder.png)](https://travis-ci.org/#!/herby/amd-config-builder)
 ==================
 
 Builds amd config for a project from configs of its components
