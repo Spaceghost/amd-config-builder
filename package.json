@@ -1,0 +1,26 @@
+{
+  "name": "amd-config-builder",
+  "version": "0.0.1",
+  "description": "Builds amd config for a project from configs of its components",
+  "main": "lib/configbuilder.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/herby/amd-config-builder.git"
+  },
+  "keywords": [
+    "AMD",
+    "config",
+    "build"
+  ],
+  "author": "Herbert Vojčík",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/herby/amd-config-builder/issues"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
