@@ -1,0 +1,5 @@
+{
+    "config": {
+        "fooStripped": {"foo": "bar"}
+    }
+}

@@ -1,0 +1,5 @@
+{
+    "config": {
+        "fooMissing": {"foo": "bar"}
+    }
+}
