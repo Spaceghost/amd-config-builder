@@ -119,3 +119,14 @@ require.config({
 
 This, saved to a file, can be used as-is as a script to set up requirejs (or other loader),
 and it can as well be used as `mainConfigFile` for the requirejs optimizer.
+
+API
+----
+
+**require('amd-config-builder').produceConfigObject(rootDir, function(err, result))**
+
+This scans for the subtree of _rootDir_ and call the _callback_
+with either the error or with _(null, configObject)_. The _configObject_
+is what you put into `require.config` call.
+All paths in _configObject_'s paths section that were not absolute / uri,
+are relative to _rootDir_
