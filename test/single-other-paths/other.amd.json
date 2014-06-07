@@ -1,0 +1,9 @@
+{
+    "paths": {
+        "dot": ".",
+        "rel": "relative",
+        "sibling": "../sibling",
+        "abs": "/absolute",
+        "uri": "http://example.com/uri"
+    }
+}

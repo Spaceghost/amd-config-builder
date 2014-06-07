@@ -93,3 +93,36 @@ describe('#produceConfigObject knows to deal with shims', function () {
     });
 
 });
+
+describe('#produceConfigObject paths', function () {
+    it('should leave root local.amd.json paths unchanged', function (done) {
+        builder.produceConfigObject(fixture('single-local-paths'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                paths: {dot: ".", rel: "relative", sibling: "../sibling", abs: "/absolute", uri: "http://example.com/uri"}
+            });
+            done();
+        });
+    });
+
+    it('should make deep local.amd.json paths relative to deep', function (done) {
+        builder.produceConfigObject(fixture('single-deep-local-paths'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                paths: {dot: "deep", rel: "deep/relative", sibling: "sibling", abs: "/absolute", uri: "http://example.com/uri"}
+            });
+            done();
+        });
+    });
+
+    it('should make foo.amd.json paths relative to foo that is least deep', function (done) {
+        builder.produceConfigObject(fixture('single-other-paths'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                paths: {dot: "z2/other", rel: "z2/other/relative", sibling: "z2/sibling", abs: "/absolute", uri: "http://example.com/uri"}
+            });
+            done();
+        });
+    });
+
+});
