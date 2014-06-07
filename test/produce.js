@@ -66,3 +66,30 @@ describe('#produceConfigObject merging', function () {
     });
 
 });
+
+describe('#produceConfigObject knows to deal with shims', function () {
+    it('should output default array as {deps: anArray} in shim', function (done) {
+        builder.produceConfigObject(fixture('single-local-shim'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                shim: {foo: {deps: ["bar"]}}
+            });
+            done();
+        });
+    });
+
+    it('should merge shims from {root,deep}/local.amd.json then from {foo,bar}.amd.json given {foo,bar} dir is present', function (done) {
+        builder.produceConfigObject(fixture('two-locals-two-others-shim'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                config: {a:2, b:2, c:2, d:2, e:1, f:1},
+                shim: {
+                    a: {deps: ["deeplocal", "other"], exports: "deep"},
+                    b: {deps: ["rootlocal", "deep"], exports: "other"}
+                }
+            });
+            done();
+        });
+    });
+
+});

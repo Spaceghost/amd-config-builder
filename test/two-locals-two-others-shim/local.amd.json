@@ -1,0 +1,9 @@
+{
+    "config": {
+        "c": 1, "d": 1, "f": 1
+    },
+    "shim": {
+        "a": {"exports": "rootlocal"},
+        "b": {"deps": ["rootlocal"], "exports": "rootlocal"}
+    }
+}

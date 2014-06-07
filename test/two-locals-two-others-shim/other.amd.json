@@ -1,0 +1,9 @@
+{
+    "config": {
+        "b": 2, "c": 2
+    },
+    "shim": {
+        "a": {"deps": ["other"]},
+        "b": {"exports": "other"}
+    }
+}

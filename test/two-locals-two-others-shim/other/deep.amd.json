@@ -1,0 +1,9 @@
+{
+    "config": {
+        "a": 2, "d": 2
+    },
+    "shim": {
+        "a": {"exports": "deep"},
+        "b": ["deep"]
+    }
+}
