@@ -21,6 +21,17 @@ describe('#produceConfigObject merging', function () {
         });
     });
 
+    it('should work root being \'.\'', function (done) {
+        process.chdir(fixture('single-local'));
+        builder.produceConfigObject('.', function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                config: {foo: {foo: "bar"}}
+            });
+            done();
+        });
+    });
+
     it('should fail if foo.amd.json is present and there is no foo', function (done) {
         builder.produceConfigObject(fixture('local-and-missing'), function (err, result) {
             assert.ok(err);
