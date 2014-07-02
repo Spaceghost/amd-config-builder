@@ -70,7 +70,7 @@ describe('#produceConfigObject merging', function () {
         builder.produceConfigObject(fixture('two-locals-two-others'), function (err, result) {
             assert.ifError(err);
             assert.deepEqual(result, {
-                config: {a:2, b:2, c:2, d:2, e:1, f:1}
+                config: {a: 2, b: 2, c: 2, d: 2, e: 1, f: 1}
             });
             done();
         });
@@ -93,7 +93,7 @@ describe('#produceConfigObject knows to deal with shims', function () {
         builder.produceConfigObject(fixture('two-locals-two-others-shim'), function (err, result) {
             assert.ifError(err);
             assert.deepEqual(result, {
-                config: {a:2, b:2, c:2, d:2, e:1, f:1},
+                config: {a: 2, b: 2, c: 2, d: 2, e: 1, f: 1},
                 shim: {
                     a: {deps: ["deeplocal", "other"], exports: "deep"},
                     b: {deps: ["rootlocal", "deep"], exports: "other"}
@@ -131,6 +131,23 @@ describe('#produceConfigObject paths', function () {
             assert.ifError(err);
             assert.deepEqual(result, {
                 paths: {dot: "z2/other", rel: "z2/other/relative", sibling: "z2/sibling", abs: "/absolute", uri: "http://example.com/uri"}
+            });
+            done();
+        });
+    });
+
+    it('should works with array paths correctly', function (done) {
+        builder.produceConfigObject(fixture('arrays-in-paths'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                paths: {
+                    dot0: ".", rel0: "relative", sibling0: "../sibling", abs0: "/absolute", uri0: "http://example.com/uri",
+                    arr0: [".", "relative", "../sibling", "/absolute", "http://example.com/uri"],
+                    dot1: "deep", rel1: "deep/relative", sibling1: "sibling", abs1: "/absolute", uri1: "http://example.com/uri",
+                    arr1: ["deep", "deep/relative", "sibling", "/absolute", "http://example.com/uri"],
+                    dot2: "z2/other", rel2: "z2/other/relative", sibling2: "z2/sibling", abs2: "/absolute", uri2: "http://example.com/uri",
+                    arr2: ["z2/other", "z2/other/relative", "z2/sibling", "/absolute", "http://example.com/uri"]
+                }
             });
             done();
         });

@@ -1,0 +1,16 @@
+{
+    "paths": {
+        "dot2": ".",
+        "rel2": "relative",
+        "sibling2": "../sibling",
+        "abs2": "/absolute",
+        "uri2": "http://example.com/uri",
+        "arr2": [
+            ".",
+            "relative",
+            "../sibling",
+            "/absolute",
+            "http://example.com/uri"
+        ]
+    }
+}

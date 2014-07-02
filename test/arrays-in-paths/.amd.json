@@ -1,0 +1,6 @@
+{
+    "paths": {
+        "fooDot": "fooDot",
+        "fooDotArray": [ "fooDotArray"]
+    }
+}

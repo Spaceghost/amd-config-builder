@@ -1,0 +1,6 @@
+{
+    "paths": {
+        "fooStripped": "fooStripped",
+        "fooStrippedArray": [ "fooStrippedArray" ]
+    }
+}
