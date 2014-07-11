@@ -1,0 +1,6 @@
+{
+    "config": {
+        "foo": {"foo": "bar"},
+        "shared": "root"
+    }
+}

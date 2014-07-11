@@ -66,6 +66,16 @@ describe('#produceConfigObject merging', function () {
         });
     });
 
+    it('should include both local.amd.json if root and deep are present, deep first', function (done) {
+        builder.produceConfigObject(fixture('two-locals-with-shared'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                config: {foo: {foo: "bar"}, fooDeep: {foo: "bar"}, shared: "root"}
+            });
+            done();
+        });
+    });
+
     it('should include {root,deep}/local.amd.json first and {foo,bar}.amd.json afterwards given {foo,bar} dir is present', function (done) {
         builder.produceConfigObject(fixture('two-locals-two-others'), function (err, result) {
             assert.ifError(err);
@@ -76,6 +86,15 @@ describe('#produceConfigObject merging', function () {
         });
     });
 
+    it('should include {root,deep}/local.amd.json first and {foo,bar}.amd.json afterwards given {foo,bar} dir is present, deeps first', function (done) {
+        builder.produceConfigObject(fixture('two-locals-two-others-with-shared'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                config: {a: 2, b: 2, c: 2, d: 2, e: 1, f: 1, g: 2, h: 1}
+            });
+            done();
+        });
+    });
 });
 
 describe('#produceConfigObject knows to deal with shims', function () {

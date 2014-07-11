@@ -1,0 +1,6 @@
+{
+    "config": {
+        "fooDeep": {"foo": "bar"},
+        "shared": "deep"
+    }
+}
