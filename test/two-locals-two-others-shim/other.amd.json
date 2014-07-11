@@ -3,7 +3,7 @@
         "b": 2, "c": 2
     },
     "shim": {
-        "a": {"deps": ["other"]},
+        "a": {"deps": ["other"], "exports": "other"},
         "b": {"exports": "other"}
     }
 }

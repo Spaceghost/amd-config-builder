@@ -3,7 +3,7 @@
         "c": 1, "d": 1, "f": 1
     },
     "shim": {
-        "a": {"exports": "rootlocal"},
+        "a": {},
         "b": {"deps": ["rootlocal"], "exports": "rootlocal"}
     }
 }

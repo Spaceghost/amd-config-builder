@@ -66,7 +66,7 @@ describe('#produceConfigObject merging', function () {
         });
     });
 
-    it('should include both local.amd.json if root and deep are present, deep first', function (done) {
+    it('should include both local.amd.json if root and deep are present, parent should win', function (done) {
         builder.produceConfigObject(fixture('two-locals-with-shared'), function (err, result) {
             assert.ifError(err);
             assert.deepEqual(result, {
@@ -76,21 +76,31 @@ describe('#produceConfigObject merging', function () {
         });
     });
 
-    it('should include {root,deep}/local.amd.json first and {foo,bar}.amd.json afterwards given {foo,bar} dir is present', function (done) {
-        builder.produceConfigObject(fixture('two-locals-two-others'), function (err, result) {
+    it('should include both local.amd.json if root and deep are present, parent should be first in arrays', function (done) {
+        builder.produceConfigObject(fixture('two-locals-with-shared-array'), function (err, result) {
             assert.ifError(err);
             assert.deepEqual(result, {
-                config: {a: 2, b: 2, c: 2, d: 2, e: 1, f: 1}
+                config: {foo: {foo: "bar"}, fooDeep: {foo: "bar"}, shared: ["root", 0, "deep", 0]}
             });
             done();
         });
     });
 
-    it('should include {root,deep}/local.amd.json first and {foo,bar}.amd.json afterwards given {foo,bar} dir is present, deeps first', function (done) {
+    it('should include {root,deep}/local.amd.json and {foo,bar}.amd.json given {foo,bar} dir is present, locals should win', function (done) {
+        builder.produceConfigObject(fixture('two-locals-two-others'), function (err, result) {
+            assert.ifError(err);
+            assert.deepEqual(result, {
+                config: {a: 1, b: 1, c: 1, d: 1, e: 1, f: 1}
+            });
+            done();
+        });
+    });
+
+    it('should include {root,deep}/local.amd.json and {foo,bar}.amd.json given {foo,bar} dir is present, locals and parents should win', function (done) {
         builder.produceConfigObject(fixture('two-locals-two-others-with-shared'), function (err, result) {
             assert.ifError(err);
             assert.deepEqual(result, {
-                config: {a: 2, b: 2, c: 2, d: 2, e: 1, f: 1, g: 2, h: 1}
+                config: {a: 1, b: 1, c: 1, d: 1, e: 1, f: 1, g: 2, h: 1}
             });
             done();
         });
@@ -108,14 +118,14 @@ describe('#produceConfigObject knows to deal with shims', function () {
         });
     });
 
-    it('should merge shims from {root,deep}/local.amd.json then from {foo,bar}.amd.json given {foo,bar} dir is present', function (done) {
+    it('should merge shims from {root,deep}/local.amd.json and from {foo,bar}.amd.json given {foo,bar} dir is present, locals and parent should win or be first', function (done) {
         builder.produceConfigObject(fixture('two-locals-two-others-shim'), function (err, result) {
             assert.ifError(err);
             assert.deepEqual(result, {
-                config: {a: 2, b: 2, c: 2, d: 2, e: 1, f: 1},
+                config: {a: 1, b: 1, c: 1, d: 1, e: 1, f: 1},
                 shim: {
-                    a: {deps: ["deeplocal", "other"], exports: "deep"},
-                    b: {deps: ["rootlocal", "deep"], exports: "other"}
+                    a: {deps: ["deeplocal", "other"], exports: "other"},
+                    b: {deps: ["rootlocal", "deep"], exports: "rootlocal"}
                 }
             });
             done();
