@@ -1,6 +1,6 @@
 {
   "name": "amd-config-builder",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Builds amd config for a project from configs of its components",
   "main": "lib/config-builder.js",
   "scripts": {
