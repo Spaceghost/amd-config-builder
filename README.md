@@ -1,16 +1,16 @@
 amd-config-builder [![Travis CI Status](https://secure.travis-ci.org/herby/amd-config-builder.png)](https://travis-ci.org/#!/herby/amd-config-builder)
 ==================
 
-Builds amd config for a project from configs of its components
+Builds AMD config for a project from configs of its components.
 
 
-For a bigger project, where you load modules using AMD< you face with the problem of building
-a big `require.config` call encompassing all dependencies and shims. Whwnever you change something
-about the structure of the project, this big structure inside the call need to be changed.
+For a bigger project, where you load modules using AMD, you face the problem of building
+a big `require.config` call encompassing all dependencies and shims. Whenever you change something
+about the structure of the project, this big structure inside the call needs to be changed.
 
-As an example: you use CodeMirror, a non-amd module in your project. You naturally use jQuery,
+As an example: you use CodeMirror, a non-AMD module, in your project. You naturally use jQuery,
 the AMD project with hardcoded id (because CodeMirror needs it). Plus, you have some more modules
-(like es5-shim) in you `bower_components`, and you have some modules in your own app.
+(like es5-shim) in your `bower_components`, and you have some modules in your own app.
 
 The premise of this project is to be able to specify pieces of AMD to-be-passed-into-`require.config`
 object per component, that is, if the project has this structure:
@@ -97,7 +97,7 @@ The `name.amd.json` files describe the missing pieces of config for other depend
 
 Q: "What if there are more directories with name `name`?
 
-A: "The one which is less deeper in the hierarchy wins. If there are more of them at the same depth, the result is undefined (probably on of them is used; maybe some hinting as to which one should be preferred can be added in the future)."
+A: "The one which is less deep in the hierarchy wins. If there are multiple at the same depth, the result is undefined (probably one of them is used; maybe some hinting as to which one should be preferred can be added in the future)."
 
 The result should be to look for all `.amd.json` files in the project and assemble all these files into one big `require.config` call:
 
@@ -125,7 +125,7 @@ API
 
 **require('amd-config-builder').produceConfigObject(rootDir, function(err, result))**
 
-This scans for the subtree of _rootDir_ and call the _callback_
+This scans for the subtree of _rootDir_ and calls the _callback_
 with either the error or with _(null, configObject)_. The _configObject_
 is what you put into `require.config` call.
 All paths in _configObject_'s paths section that were not absolute / uri,
